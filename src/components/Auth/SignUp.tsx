@@ -18,7 +18,7 @@ const SignUp = () => {
 
   const navigate = useNavigate();
 
-  const handleSignUp = async (e : FormEvent) => {
+  const handleSignUp = async (e: FormEvent) => {
     e.preventDefault();
 
     // validate email and password.
@@ -48,10 +48,9 @@ const SignUp = () => {
     const checkAuthentication = async () => {
       try {
         await initializeDB();
-        if (getCookie("email")) {
+        console.log(getCookie("email"))
+        if (getCookie("email"))
           navigate("/");
-          return;
-        }
         setIsLoading(false);
       } catch (error) {
         setIsLoading(false);

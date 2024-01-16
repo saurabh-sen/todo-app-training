@@ -67,7 +67,7 @@ const TodosList = () => {
       </div>
       <div className="flex flex-col justify-start items-center gap-7 h-auto md:h-[500px] overflow-y-auto">
         {filteredTodos.length === 0 ? (
-          <p className="text-gray-500 text-center mt-4">No Todos found. Let's add some tasks! 🚀</p>
+          <p className="text-gray-200 text-center mt-4">No Todos found. Let's add some tasks! 🚀</p>
         ) : (
           filteredTodos.map((item, index) => (
             <TodoItem key={index} {...item} />

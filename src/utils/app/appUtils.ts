@@ -1,9 +1,4 @@
-const idb =
-  window.indexedDB ||
-  window.mozIndexedDB ||
-  window.webkitIndexedDB ||
-  window.msIndexedDB ||
-  window.shimIndexedDB;
+const idb = window.indexedDB
 
 const initializeDB = () => {
   return new Promise((res, rej) => {
@@ -20,8 +15,8 @@ const initializeDB = () => {
         rej("An error occurred with IndexedDB");
       };
 
-      request.onupgradeneeded = async (event) => {
-        const db = event.target.result;
+      request.onupgradeneeded = async () => {
+        const db = request.result;
 
         // Check if the object store exists, and create it if it doesn't
         if (!db.objectStoreNames.contains("todosData")) {
