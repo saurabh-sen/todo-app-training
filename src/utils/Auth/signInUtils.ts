@@ -1,11 +1,6 @@
 import toast from "react-hot-toast";
 
-const idb =
-  window.indexedDB ||
-  window.mozIndexedDB ||
-  window.webkitIndexedDB ||
-  window.msIndexedDB ||
-  window.shimIndexedDB;
+const idb = window.indexedDB
 
 const validateSignInInput = (email: string, password: string) => {
   // Define regex patterns
@@ -56,14 +51,14 @@ const checkCred = (emailClient: string, passwordClient: string) => {
 
         const addRequest = userData.get(emailClient);
 
-        addRequest.onsuccess = (event) => {
+        addRequest.onsuccess = () => {
           if (!addRequest.result) return rej("Invalid Credentials");
           const { email, password } = addRequest.result;
           if (emailClient === email && passwordClient === password) res(true);
           rej("Invalid Credentials");
         };
 
-        addRequest.onerror = (error) => {
+        addRequest.onerror = () => {
           rej("Invalid Credentials");
         };
       };

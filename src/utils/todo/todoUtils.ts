@@ -1,9 +1,7 @@
+import toast from "react-hot-toast";
+
 const idb =
-  window.indexedDB ||
-  window.mozIndexedDB ||
-  window.webkitIndexedDB ||
-  window.msIndexedDB ||
-  window.shimIndexedDB;
+  window.indexedDB
 
 interface ITodos {
   title: string;
@@ -51,8 +49,8 @@ const saveTodoInDB = (title: string, description: string, date: string) => {
         rej("An error occurred with IndexedDB");
       };
 
-      request.onsuccess = (e) => {
-        const db = e.target.result;
+      request.onsuccess = () => {
+        const db = request.result;
 
         if (!db.objectStoreNames.contains("todosData")) {
           rej("todosData not found");
@@ -72,11 +70,11 @@ const saveTodoInDB = (title: string, description: string, date: string) => {
 
         const addRequest = todosData.add(item);
 
-        addRequest.onsuccess = (event) => {
+        addRequest.onsuccess = () => {
           res("item added successfully");
         };
 
-        addRequest.onerror = (error) => {
+        addRequest.onerror = () => {
           rej("Error while saving");
         };
       };
@@ -86,7 +84,7 @@ const saveTodoInDB = (title: string, description: string, date: string) => {
   });
 };
 
-const getAllTodos = (): ITodos[] => {
+const getAllTodos = () => {
   return new Promise((res, rej) => {
     try {
       const request = idb.open("todos", 1);
@@ -109,9 +107,11 @@ const getAllTodos = (): ITodos[] => {
         const tx = db.transaction("todosData", "readonly");
         const todosData = tx.objectStore("todosData");
 
-        const data = [];
+        let data : ITodos[] = [];
 
         todosData.openCursor().onsuccess = function (cursorEvent) {
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          // @ts-ignore
           const cursor = cursorEvent.target.result;
 
           if (cursor) {

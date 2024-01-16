@@ -1,11 +1,7 @@
 import toast from "react-hot-toast";
 
 const idb =
-  window.indexedDB ||
-  window.mozIndexedDB ||
-  window.webkitIndexedDB ||
-  window.msIndexedDB ||
-  window.shimIndexedDB;
+  window.indexedDB
 
 const validateSignUpInput = (
   name: string,
@@ -118,11 +114,11 @@ const saveToDB = ({ name, email, password }: ISaveToDB) => {
 
         const addRequest = userData.add(item);
 
-        addRequest.onsuccess = (event) => {
+        addRequest.onsuccess = () => {
           res("item added successfully");
         };
 
-        addRequest.onerror = (error) => {
+        addRequest.onerror = () => {
           rej("Error while registering");
         };
       };
