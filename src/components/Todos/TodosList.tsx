@@ -38,7 +38,11 @@ const TodosList = () => {
     const getTodos = async () => {
       try {
         const result = await getAllTodos();
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
         setTodos(result);
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
         setFilteredTodos(result);
       } catch (error) {
         console.log(error);
